@@ -70,7 +70,7 @@ Each of the next $k$ lines contains three space-separated integers, $r, c1$ and 
 **Language:** C++  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-07-31T09:20:45.669Z  
+**Submitted:** 2026-07-31T09:20:57.730Z  
 
 ```cpp
 #include <bits/stdc++.h>
