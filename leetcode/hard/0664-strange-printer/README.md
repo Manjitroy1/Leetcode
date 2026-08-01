@@ -41,9 +41,9 @@ Explanation: Print "aaa" first and then print "b" from the second place of the s
 ## Solution
 
 **Language:** C++  
-**Runtime:** 21 ms (beats 30.68%)  
-**Memory:** 12.1 MB (beats 65.93%)  
-**Submitted:** 2026-08-01T17:12:37.038Z  
+**Runtime:** 18 ms (beats 51.82%)  
+**Memory:** 12.4 MB (beats 37.95%)  
+**Submitted:** 2026-08-01T17:14:51.528Z  
 
 ```cpp
 class Solution {
@@ -56,7 +56,7 @@ public:
 
         for(int k=start+1;k<=end;k++){
             if(s[start]==s[k]){
-                dp[start][end] = min(dp[start][end], recc(start+1,k-1,s,dp) + recc(k,end,s,dp));
+                dp[start][end] = min(dp[start][end], recc(start,k-1,s,dp) + recc(k+1,end,s,dp));
             }
         }
         return dp[start][end];
