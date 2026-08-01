@@ -8,7 +8,7 @@ public:
 
         for(int k=start+1;k<=end;k++){
             if(s[start]==s[k]){
-                dp[start][end] = min(dp[start][end], recc(start+1,k-1,s,dp) + recc(k,end,s,dp));
+                dp[start][end] = min(dp[start][end], recc(start,k-1,s,dp) + recc(k+1,end,s,dp));
             }
         }
         return dp[start][end];
