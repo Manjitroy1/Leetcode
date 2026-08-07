@@ -40,8 +40,8 @@ Output: 1
 
 **Language:** C++  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 10.8 MB (beats 30.76%)  
-**Submitted:** 2026-08-07T10:05:33.736Z  
+**Memory:** 10.2 MB (beats 54.14%)  
+**Submitted:** 2026-08-07T10:09:39.207Z  
 
 ```cpp
 class Solution {
@@ -69,7 +69,7 @@ public:
 
     //     return cnt;
     // }
-    void recc(int curr, vector<int>& nums) {
+void recc(int curr, vector<int>& nums) {
     if(curr == nums.size()) {
         cnt++;
         return;
@@ -91,11 +91,24 @@ public:
     }
 }
 
+void help(int curr,vector<int> arr){
+        if(curr>= arr.size()){
+            cnt++;
+            return ;
+        }
+        for(int i= curr;i<arr.size();i++){
+            if(i== curr || arr[i]!= arr[curr]){
+                swap(arr[curr],arr[i]);
+                if(curr==0 || (curr>0 && sq(arr[curr-1]+arr[curr]))) help(curr+1,arr);
+            }
+        }
+    }
     int numSquarefulPerms(vector<int>& nums) {
     //    return solve(nums);
         int n=nums.size();
         sort(nums.begin(),nums.end());
-        recc(0,nums); 
+        // recc(0,nums); 
+        help(0,nums);
         return cnt;
     }
 };
