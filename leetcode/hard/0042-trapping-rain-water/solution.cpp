@@ -29,7 +29,27 @@ public:
         }
         return ans;
     }
+    int solveopt(vector<int>&height){
+        int n=height.size();
+        int l=0;
+        int r=n-1;
+        int lmx=0;
+        int rmx=0;
+        int ans=0;
+        while(l<r){
+            if(height[l]<=height[r]){
+                ans+= (lmx-height[l]) >0 ? (lmx-height[l]) : 0;
+                lmx=max(lmx, height[l]);
+                l++;
+            }else{
+                ans+= (rmx-height[r]) >0 ? (rmx-height[r]) : 0;
+                rmx=max(rmx, height[r]);
+                r--;
+            }
+        }
+        return ans;
+    }
     int trap(vector<int>& height) {
-        return solve(height);
+        return solveopt(height);
     }
 };
