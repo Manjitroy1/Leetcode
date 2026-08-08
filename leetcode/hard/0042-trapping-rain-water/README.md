@@ -37,8 +37,8 @@ Output: 9
 
 **Language:** C++  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 27.4 MB (beats 17.36%)  
-**Submitted:** 2026-08-08T06:04:28.504Z  
+**Memory:** 26.1 MB (beats 57.40%)  
+**Submitted:** 2026-08-08T06:21:22.088Z  
 
 ```cpp
 class Solution {
@@ -72,8 +72,28 @@ public:
         }
         return ans;
     }
+    int solveopt(vector<int>&height){
+        int n=height.size();
+        int l=0;
+        int r=n-1;
+        int lmx=0;
+        int rmx=0;
+        int ans=0;
+        while(l<r){
+            if(height[l]<=height[r]){
+                ans+= (lmx-height[l]) >0 ? (lmx-height[l]) : 0;
+                lmx=max(lmx, height[l]);
+                l++;
+            }else{
+                ans+= (rmx-height[r]) >0 ? (rmx-height[r]) : 0;
+                rmx=max(rmx, height[r]);
+                r--;
+            }
+        }
+        return ans;
+    }
     int trap(vector<int>& height) {
-        return solve(height);
+        return solveopt(height);
     }
 };
 ```
