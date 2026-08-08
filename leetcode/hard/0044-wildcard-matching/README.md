@@ -51,9 +51,9 @@ Explanation: '?' matches 'c', but the second letter is 'a', which does not matc
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 8 MB  
-**Submitted:** 2026-08-08T06:40:03.360Z  
+**Runtime:** 37 ms (beats 79.20%)  
+**Memory:** 54.7 MB (beats 13.36%)  
+**Submitted:** 2026-08-08T06:40:09.970Z  
 
 ```cpp
 class Solution {
