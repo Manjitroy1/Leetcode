@@ -53,14 +53,15 @@ Output: "123"
 ## Solution
 
 **Language:** C++  
-**Runtime:** 55 ms (beats 16.54%)  
-**Memory:** 7.8 MB (beats 98.04%)  
-**Submitted:** 2026-08-08T08:54:09.615Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 8.1 MB (beats 81.82%)  
+**Submitted:** 2026-08-08T09:30:43.730Z  
 
 ```cpp
 class Solution {
 public:
-    string getPermutation(int n, int k) {
+
+string sovle(int n, int k) {
         string arr="";
         for(int i=1;i<=n;i++){
             // arr.push_back(i);
@@ -72,6 +73,48 @@ public:
             k--;
         }while(k && next_permutation(arr.begin(),arr.end()));
         return ans;
+    }
+    int next(vector<int>&arr,int pos){
+        //first indx that is not used
+        int cnt=0;
+        for(int i=0;i<arr.size();i++){
+            if(arr[i]!=0){
+                cnt++;
+                if(cnt==pos){
+                    arr[i]=0;
+                    return i+1;
+                }
+            }
+        }
+        return 0;
+    }
+    string solveopt(int n,int k){
+        vector<int>fact(n);
+        fact[0]=1;
+        for(int i=1;i<n;i++){
+            fact[i]=i* fact[i-1];
+        }
+
+        string s="";
+        for(int i=1;i<=n;i++){
+            s+=(i+'0');
+        }
+
+        k--; // zero based
+
+        string ans="";
+        for(int i=n;i>=1;i--){
+            int pos = k/fact[i-1];
+            ans+= s[pos];
+            s.erase(s.begin()+pos);
+            k%=fact[i-1];
+        }
+        return ans;
+       
+    }
+    string getPermutation(int n, int k) {
+        // return solve(n,k);
+        return solveopt(n,k);
     }
 };
 ```
