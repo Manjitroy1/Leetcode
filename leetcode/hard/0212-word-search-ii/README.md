@@ -42,90 +42,151 @@ Output: []
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 8.8 MB  
-**Submitted:** 2026-08-10T12:01:16.803Z  
+**Runtime:** 318 ms (beats 60.42%)  
+**Memory:** 18.8 MB (beats 89.88%)  
+**Submitted:** 2026-08-10T12:47:45.628Z  
 
 ```cpp
+struct Node {
+    Node* links[26] = {};
+    string word = "";
+
+    bool containkey(char c) {
+        return links[c - 'a'] != nullptr;
+    }
+
+    void put(char c, Node* node) {
+        links[c - 'a'] = node;
+    }
+
+    Node* next(char c) {
+        return links[c - 'a'];
+    }
+
+    void end(string& w) {
+        word = w;
+    }
+};
+
+
+class Trie {
+public:
+
+    Node* root;
+
+    Trie() {
+        root = new Node();
+    }
+
+    void insert(string& word) {
+
+        Node* node = root;
+
+        for(int i = 0; i < word.size(); i++) {
+
+            if(!node->containkey(word[i])) {
+                node->put(word[i], new Node());
+            }
+
+            node = node->next(word[i]);
+        }
+
+        node->end(word);
+    }
+};
+
+
 class Solution {
 public:
 
-    bool dfs(int i, int j, int pos, string& word,
+    int n, m;
+
+    int dr[4] = {-1, 1, 0, 0};
+    int dc[4] = {0, 0, -1, 1};
+
+
+    void dfs(int i, int j,
              vector<vector<char>>& board,
+             Node* node,
              vector<string>& ans) {
 
-        int n = board.size();
-        int m = board[0].size();
+        // Current cell is already visited
+        if(board[i][j] == '#')
+            return;
 
-        // Entire word matched
-        if(pos >= word.size()){
-            ans.push_back(word);
-            return true;
+        char c = board[i][j];
+
+        // Check whether this character exists in Trie
+        if(!node->containkey(c))
+            return;
+
+        // Move to the corresponding Trie node
+        node = node->next(c);
+
+
+        // We have found a complete word
+        if(node->word != "") {
+
+            ans.push_back(node->word);
+
+            // Prevent duplicate answer
+            node->word = "";
         }
 
-        // Current character doesn't match
-        if(word[pos] != board[i][j])
-            return false;
 
-        // Mark current cell as visited
-        char temp = board[i][j];
+        // Mark current board cell as visited
         board[i][j] = '#';
 
-        int dr[] = {-1, 1, 0, 0};
-        int dc[] = {0, 0, -1, 1};
 
-        for(int d = 0; d < 4; d++){
+        // Explore 4 directions
+        for(int d = 0; d < 4; d++) {
 
-            int vr = i + dr[d];
-            int vc = j + dc[d];
+            int ni = i + dr[d];
+            int nj = j + dc[d];
 
-            if(vr >= 0 && vr < n &&
-               vc >= 0 && vc < m &&
-               board[vr][vc] != '#') {
+            if(ni >= 0 && ni < n &&
+               nj >= 0 && nj < m) {
 
-                if(dfs(vr, vc, pos + 1, word, board, ans)) {
-
-                    // Restore current cell
-                    board[i][j] = temp;
-
-                    return true;
-                }
+                dfs(ni, nj, board, node, ans);
             }
         }
 
-        // Restore current cell
-        board[i][j] = temp;
 
-        return false;
+        // Backtrack
+        board[i][j] = c;
     }
+
 
     vector<string> findWords(vector<vector<char>>& board,
                              vector<string>& words) {
 
-        int n = board.size();
-        int m = board[0].size();
+        Trie first;
+
+        Node* rootnode = first.root;
+
+
+        // Insert all words into Trie
+        for(string& w : words) {
+            first.insert(w);
+        }
+
 
         vector<string> ans;
 
-        for(int k = 0; k < words.size(); k++){
 
-            bool found = false;
+        n = board.size();
+        m = board[0].size();
 
-            for(int i = 0; i < n && !found; i++){
 
-                for(int j = 0; j < m; j++){
+        // Start DFS from every cell
+        for(int i = 0; i < n; i++) {
 
-                    if(board[i][j] == words[k][0]) {
+            for(int j = 0; j < m; j++) {
 
-                        if(dfs(i, j, 0, words[k], board, ans)) {
-
-                            found = true;
-                            break;
-                        }
-                    }
-                }
+                dfs(i, j, board, rootnode, ans);
             }
         }
+
 
         return ans;
     }
