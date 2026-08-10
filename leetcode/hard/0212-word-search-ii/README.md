@@ -43,8 +43,8 @@ Output: []
 
 **Language:** C++  
 **Runtime:** 0 ms  
-**Memory:** 8.6 MB  
-**Submitted:** 2026-08-10T12:00:57.510Z  
+**Memory:** 8.8 MB  
+**Submitted:** 2026-08-10T12:01:16.803Z  
 
 ```cpp
 class Solution {
