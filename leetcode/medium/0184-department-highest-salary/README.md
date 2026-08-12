@@ -83,24 +83,36 @@ Explanation: Max and Jim both have the highest salary in the IT department and H
 ## Solution
 
 **Language:** SQL  
-**Runtime:** 831 ms (beats 42.66%)  
+**Runtime:** 1045 ms (beats 25.26%)  
 **Memory:** 0B (beats 100.00%)  
-**Submitted:** 2026-08-12T11:36:30.340Z  
+**Submitted:** 2026-08-12T11:39:41.522Z  
 
 ```sql
+-- SELECT d.name AS Department,
+--        e.name AS Employee,
+--        e.salary AS Salary
+-- FROM Employee e
+-- JOIN Department d
+--     ON e.departmentId = d.id
+-- JOIN (
+--     SELECT departmentId, MAX(salary) AS max_salary
+--     FROM Employee
+--     GROUP BY departmentId
+-- ) m
+--     ON e.departmentId = m.departmentId
+--    AND e.salary = m.max_salary;
+
 SELECT d.name AS Department,
        e.name AS Employee,
        e.salary AS Salary
 FROM Employee e
 JOIN Department d
     ON e.departmentId = d.id
-JOIN (
-    SELECT departmentId, MAX(salary) AS max_salary
-    FROM Employee
-    GROUP BY departmentId
-) m
-    ON e.departmentId = m.departmentId
-   AND e.salary = m.max_salary;
+where e.salary =(
+    select max(salary)
+    from Employee
+    where departmentId = e.departmentId
+)
 ```
 
 ---
