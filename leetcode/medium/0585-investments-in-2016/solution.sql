@@ -1,0 +1,15 @@
+# Write your MySQL query statement below
+select round(sum(tiv_2016),2) as tiv_2016
+from Insurance  as a
+where a.tiv_2015 in ( 
+        select tiv_2015 
+        from Insurance
+        group by tiv_2015
+        having count(*) > 1
+    ) 
+    and(a.lat, a.lon) in (
+        select lat,lon
+        from insurance 
+        group by lat,lon
+        having count(*)=1
+    )
