@@ -22,7 +22,7 @@ class Solution {
     int maximumGap(string skill, string station) {
         int n=skill.size();
         int m=station.size();
-        if(n==1) return 0;
+        if(n==1 || n==m) return 0;
         int l=0; //zero gap
         int h= m-n+1; //max possible gap;
         //apply binary search
