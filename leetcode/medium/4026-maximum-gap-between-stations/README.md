@@ -70,8 +70,8 @@ Return the  **maximum**  possible gap among all valid assignments. It is guarant
 
 **Language:** C++  
 **Runtime:** 0 ms  
-**Memory:** 7.6 MB  
-**Submitted:** 2026-08-16T13:39:17.490Z  
+**Memory:** 7.8 MB  
+**Submitted:** 2026-08-16T13:39:37.621Z  
 
 ```cpp
 class Solution {
@@ -98,7 +98,7 @@ class Solution {
     int maximumGap(string skill, string station) {
         int n=skill.size();
         int m=station.size();
-        if(n==1) return 0;
+        if(n==1 || n==m) return 0;
         int l=0; //zero gap
         int h= m-n+1; //max possible gap;
         //apply binary search
