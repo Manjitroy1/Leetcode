@@ -71,49 +71,73 @@ Return the  **maximum**  possible gap among all valid assignments. It is guarant
 **Language:** C++  
 **Runtime:** 0 ms  
 **Memory:** 7.8 MB  
-**Submitted:** 2026-08-16T13:40:06.793Z  
+**Submitted:** 2026-08-16T13:51:19.612Z  
 
 ```cpp
 class Solution {
-    public:
-    bool possible(string skill, string station,int mid){
-        int n=skill.size();
-        int m=station.size();
-        int first=0;
-        while(station[first]!=skill[0]){
-            first++; //first char placed
-        }
-        int j=1;
-        int last=first-1;
-        for(int i=first;i<m;i++){
-            if(station[i]==skill[j] && (i-last>=mid)){
-                j++;
-                last=i;
+public:
 
-                if(j>=n) return true;
+    bool possible(string skill, string station, int mid) {
+
+        int n = skill.size();
+        int m = station.size();
+
+        int first = 0;
+
+        while (first < m && station[first] != skill[0]) {
+            first++;
+        }
+
+        if (first == m)
+            return false;
+
+        int j = 1;
+        int last = first;
+
+        for (int i = first + 1; i < m && j < n; i++) {
+
+            if (station[i] == skill[j] && (i - last >= mid)) {
+
+                j++;
+                last = i;
+
+                if (j >= n)
+                    return true;
             }
         }
-        return j>=n;
+
+        return false;
     }
+
     int maximumGap(string skill, string station) {
-        int n=skill.size();
-        int m=station.size();
-        if(n==1) return 0;
-        int l=0; //zero gap
-        int h= m-n+1; //max possible gap;
-        //apply binary search
-        int ans=0;
-        while(l<=h){
-            int mid= (l+h)>>1;
-            if(possible(skill,station,mid)){
-                ans=h;
-                l=mid+1;
-            }else{
-                h=mid-1;
+
+        int n = skill.size();
+        int m = station.size();
+
+        if (n == 1)
+            return 0;
+
+        int l = 0;
+        int h = m - 1;
+
+        int ans = 0;
+
+        while (l <= h) {
+
+            int mid = (l + h) >> 1;
+
+            if (possible(skill, station, mid)) {
+
+                ans = mid;       // NOT h
+                l = mid + 1;
+
+            } else {
+
+                h = mid - 1;
             }
         }
+
         return ans;
-        
     }
 };
 ```
