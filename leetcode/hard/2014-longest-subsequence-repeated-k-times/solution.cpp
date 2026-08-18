@@ -18,7 +18,7 @@ public:
         return false;
         
     }
-    string longestSubsequenceRepeatedK(string s, int k) {
+    string bfs(string s, int k) {
         int n=s.size();
         string first="";
         if(k>n) return first;
@@ -40,6 +40,38 @@ public:
                 }
             }
         }
+        return ans;
+    }
+    void dfs(string curr,string& ans,string& s, int k, vector<int>&freq){
+        if(curr.size()> ans.size() || (curr.size()==ans.size() && curr>ans)) ans=curr;
+
+        for(char c='a';c<='z';c++){
+
+            if(freq[c-'a']< k) continue;
+
+            curr+=c;
+            freq[c-'a']-=k;
+
+            if(check(curr,s,k)){
+                dfs(curr,ans,s,k,freq);
+            }
+
+            curr.pop_back();
+            freq[c-'a']+=k;
+        }
+    }
+    string longestSubsequenceRepeatedK(string s, int k) {
+        int n=s.size();
+        vector<int>freq(26,0);
+        for(char c:s){
+            freq[c-'a']++;
+        }
+        //for a string to be an answer all char of c must be atleast k times present
+
+        string ans="";
+        string curr="";
+
+        dfs(curr,ans,s,k,freq);
         return ans;
     }
 };
