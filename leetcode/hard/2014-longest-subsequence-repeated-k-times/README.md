@@ -56,9 +56,9 @@ Explanation: There is no subsequence repeated 2 times. Empty string is returned.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 717 ms (beats 19.02%)  
-**Memory:** 280.3 MB (beats 17.79%)  
-**Submitted:** 2026-08-18T17:19:34.092Z  
+**Runtime:** 101 ms (beats 95.71%)  
+**Memory:** 40.8 MB (beats 26.07%)  
+**Submitted:** 2026-08-18T17:32:43.421Z  
 
 ```cpp
 class Solution {
@@ -81,7 +81,7 @@ public:
         return false;
         
     }
-    string longestSubsequenceRepeatedK(string s, int k) {
+    string bfs(string s, int k) {
         int n=s.size();
         string first="";
         if(k>n) return first;
@@ -103,6 +103,38 @@ public:
                 }
             }
         }
+        return ans;
+    }
+    void dfs(string curr,string& ans,string& s, int k, vector<int>&freq){
+        if(curr.size()> ans.size() || (curr.size()==ans.size() && curr>ans)) ans=curr;
+
+        for(char c='a';c<='z';c++){
+
+            if(freq[c-'a']< k) continue;
+
+            curr+=c;
+            freq[c-'a']-=k;
+
+            if(check(curr,s,k)){
+                dfs(curr,ans,s,k,freq);
+            }
+
+            curr.pop_back();
+            freq[c-'a']+=k;
+        }
+    }
+    string longestSubsequenceRepeatedK(string s, int k) {
+        int n=s.size();
+        vector<int>freq(26,0);
+        for(char c:s){
+            freq[c-'a']++;
+        }
+        //for a string to be an answer all char of c must be atleast k times present
+
+        string ans="";
+        string curr="";
+
+        dfs(curr,ans,s,k,freq);
         return ans;
     }
 };
