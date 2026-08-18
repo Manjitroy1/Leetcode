@@ -56,9 +56,9 @@ Explanation: There is no subsequence repeated 2 times. Empty string is returned.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 7.8 MB  
-**Submitted:** 2026-08-18T17:19:24.123Z  
+**Runtime:** 717 ms (beats 19.02%)  
+**Memory:** 280.3 MB (beats 17.79%)  
+**Submitted:** 2026-08-18T17:19:34.092Z  
 
 ```cpp
 class Solution {
