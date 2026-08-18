@@ -57,8 +57,8 @@ Explanation: [0,0,0,0,0] -> [1,1,1,1,1] -> [2,1,1,1,1] -> [3,1,1,1,1] -> [3,1,2,
 
 **Language:** C++  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 76.9 MB (beats 59.98%)  
-**Submitted:** 2026-08-18T18:25:38.696Z  
+**Memory:** 77 MB (beats 59.98%)  
+**Submitted:** 2026-08-18T18:30:38.894Z  
 
 ```cpp
 class Solution {
@@ -66,12 +66,11 @@ public:
     int minNumberOperations(vector<int>& target) {
         int ans = target[0];
 
-        for (int i = 1; i < target.size(); i++) {
-            if (target[i] > target[i - 1]) {
-                ans += target[i] - target[i - 1];
+        for (int i=1;i<target.size();i++) {
+            if (target[i]>target[i-1]){
+                ans +=target[i]-target[i-1];
             }
         }
-
         return ans;
     }
 };
