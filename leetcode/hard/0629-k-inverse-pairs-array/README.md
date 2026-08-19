@@ -38,9 +38,9 @@ Explanation: The array [1,3,2] and [2,1,3] have exactly 1 inverse pair.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 2817 ms (beats 5.10%)  
-**Memory:** 24.9 MB (beats 35.34%)  
-**Submitted:** 2026-08-19T18:13:38.121Z  
+**Runtime:** 2782 ms (beats 5.10%)  
+**Memory:** 25 MB (beats 35.34%)  
+**Submitted:** 2026-08-19T18:15:01.643Z  
 
 ```cpp
 class Solution {
@@ -50,7 +50,7 @@ public:
         if(k==0) return 1;
         vector<vector<int>>dp(n+1,vector<int>(k+1,0));
 
-        for(int i=0;i<=n;i++){
+        for(int i=1;i<=n;i++){
             dp[i][0]=1;
         }
 
