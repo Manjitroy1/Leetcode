@@ -5,7 +5,7 @@ public:
         if(k==0) return 1;
         vector<vector<int>>dp(n+1,vector<int>(k+1,0));
 
-        for(int i=0;i<=n;i++){
+        for(int i=1;i<=n;i++){
             dp[i][0]=1;
         }
 
