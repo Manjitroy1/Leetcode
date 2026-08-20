@@ -61,8 +61,8 @@ Maximum sum is obtained with the path [6,7,8,9,10].
 
 **Language:** C++  
 **Runtime:** 0 ms  
-**Memory:** 12.5 MB  
-**Submitted:** 2026-08-20T13:18:11.705Z  
+**Memory:** 12.2 MB  
+**Submitted:** 2026-08-20T13:18:55.473Z  
 
 ```cpp
 #define ll long long
@@ -76,7 +76,7 @@ public:
         int j=0;
         int n=nums1.size();
         int m=nums2.size();
-        int res=0;
+        ll res=0;
 
         while(i<n && j<m){
             if(nums1[i]<nums2[j]){
