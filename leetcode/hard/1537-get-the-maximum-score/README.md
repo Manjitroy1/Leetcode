@@ -60,9 +60,9 @@ Maximum sum is obtained with the path [6,7,8,9,10].
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 12.2 MB  
-**Submitted:** 2026-08-20T13:18:55.473Z  
+**Runtime:** 3 ms (beats 66.45%)  
+**Memory:** 59.6 MB (beats 90.94%)  
+**Submitted:** 2026-08-20T13:21:05.461Z  
 
 ```cpp
 #define ll long long
@@ -80,10 +80,10 @@ public:
 
         while(i<n && j<m){
             if(nums1[i]<nums2[j]){
-                sum1= (sum1 + nums1[i++]) % mod;
+                sum1+=nums1[i++];
 
             }else if(nums1[i]>nums2[j]){
-                sum2= (sum2 + nums2[j++]) % mod;
+                sum2+=nums2[j++];
                 
             }else{
                 res= (res + max(sum1,sum2) + nums1[i] ) % mod;
@@ -94,10 +94,10 @@ public:
         }
 
         while(i<n){
-            sum1= (sum1 + nums1[i++]) % mod;
+            sum1+=nums1[i++];
         }
         while(j<m){
-            sum2= (sum2 + nums2[j++]) % mod;
+            sum2+=nums2[j++];
         }
         res= (res + max(sum1,sum2)) % mod;
         return res;
