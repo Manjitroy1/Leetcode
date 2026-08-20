@@ -13,10 +13,10 @@ public:
 
         while(i<n && j<m){
             if(nums1[i]<nums2[j]){
-                sum1= (sum1 + nums1[i++]) % mod;
+                sum1+=nums1[i++];
 
             }else if(nums1[i]>nums2[j]){
-                sum2= (sum2 + nums2[j++]) % mod;
+                sum2+=nums2[j++];
                 
             }else{
                 res= (res + max(sum1,sum2) + nums1[i] ) % mod;
@@ -27,10 +27,10 @@ public:
         }
 
         while(i<n){
-            sum1= (sum1 + nums1[i++]) % mod;
+            sum1+=nums1[i++];
         }
         while(j<m){
-            sum2= (sum2 + nums2[j++]) % mod;
+            sum2+=nums2[j++];
         }
         res= (res + max(sum1,sum2)) % mod;
         return res;
