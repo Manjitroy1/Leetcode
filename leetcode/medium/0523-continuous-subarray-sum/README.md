@@ -57,30 +57,31 @@ Output: false
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 8.2 MB  
-**Submitted:** 2026-08-21T13:32:24.825Z  
+**Runtime:** 79 ms (beats 50.95%)  
+**Memory:** 146.4 MB (beats 26.17%)  
+**Submitted:** 2026-08-21T14:12:59.127Z  
 
 ```cpp
 class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
-        
-        unordered_map<int,int>mpp;
         int n=nums.size();
-
+        unordered_map<int,int>mpp;
+        mpp[0]=-1;
+        //store the index of remainder that comes earliest
         int sum=0;
-        // mpp[0]=1;
         for(int i=0;i<n;i++){
             sum+=nums[i];
+            int rem=sum%k;
 
-            int m=sum/k;
-            for(int j=0;j<=m;j++){
-                int need= sum - (j*k);
-                if(mpp.count(need)) return true;
+            if(mpp.count(rem)){
+                if(i-mpp[rem] >=2) return true;
             }
-            mpp[sum]++;
+            else{
+                mpp[rem]=i;
+            }
         }
+        
         return false;
     }
 };
