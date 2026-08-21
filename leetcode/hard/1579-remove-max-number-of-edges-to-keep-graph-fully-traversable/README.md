@@ -58,9 +58,9 @@ Explanation: In the current graph, Alice cannot reach node 4 from the other node
 ## Solution
 
 **Language:** C++  
-**Runtime:** 10 ms (beats 93.01%)  
+**Runtime:** 16 ms (beats 75.49%)  
 **Memory:** 143.7 MB (beats 83.92%)  
-**Submitted:** 2026-08-21T17:54:22.375Z  
+**Submitted:** 2026-08-21T17:52:26.285Z  
 
 ```cpp
 class DSU{
@@ -93,11 +93,16 @@ public:
         DSU red(n+1);
         DSU green(n+1);
         int total =edges.size();
-        int used=0;
+        int b=0,g=0,r=0;
+        int bcnt=0,rcnt=0,gcnt=0;
         for(auto& edge:edges){
             int type=edge[0];
             int u=edge[1];
             int v=edge[2];
+
+            if(type==1)r++;
+            if(type==2)g++;
+            if(type==3)b++;
 
             if(type==3){
                 int up=red.find(u);
@@ -107,8 +112,7 @@ public:
                     //unite them
                     red.unite(u,v);
                     green.unite(u,v);
-                    // bcnt++; //no of blue edges used
-                    used++;
+                    bcnt++; //no of blue edges used
                 }
             }
             
@@ -127,8 +131,7 @@ public:
                     //unite them
                     red.unite(u,v);
                     // green.unite(u,v);
-                    // rcnt++; //no of blue edges used
-                    used++;
+                    rcnt++; //no of blue edges used
                 }
             }
             if(type==2){
@@ -139,8 +142,7 @@ public:
                     //unite them
                     green.unite(u,v);
                     // green.unite(u,v);
-                    // gcnt++; //no of blue edges used
-                    used++;
+                    gcnt++; //no of blue edges used
                 }
             }
         }
@@ -151,7 +153,7 @@ public:
             if(green.size[i]==n) gflag=true;
         }
         if(!(rflag & gflag)) return -1;
-        return total - used;
+        return total - (bcnt+rcnt+gcnt);
     }
 };
 ```
