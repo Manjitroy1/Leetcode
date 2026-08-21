@@ -25,15 +25,14 @@ public:
             int dept=times[i][1];
             int idx= mpp[arr];
 
-            if(!pq.empty()){//vacant all the chairs that are possibly to leave
-                auto [leav,chr] =pq.top();
-                while(!pq.empty() && leav<=arr){
-                    auto [lv,chr] =pq.top();
-                    kursi.push(chr);
-                    pq.pop();
-                    leav=lv;
-                }
+            // if(!pq.empty()){//vacant all the chairs that are possibly to leave
+            //     auto [leav,chr] =pq.top();
+
+            while(!pq.empty() && pq.top().first <= arr){
+                kursi.push(pq.top().second);
+                pq.pop();
             }
+            // }
             //we have to give him chair
             //chair availibel
             if(!kursi.empty()){
