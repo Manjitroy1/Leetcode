@@ -61,9 +61,9 @@ Since friend 0 sat on chair 2, we return 2.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 8.5 MB  
-**Submitted:** 2026-08-21T12:06:59.981Z  
+**Runtime:** 55 ms (beats 48.50%)  
+**Memory:** 65 MB (beats 42.29%)  
+**Submitted:** 2026-08-21T12:09:50.910Z  
 
 ```cpp
 class Solution {
@@ -93,15 +93,14 @@ public:
             int dept=times[i][1];
             int idx= mpp[arr];
 
-            if(!pq.empty()){//vacant all the chairs that are possibly to leave
-                auto [leav,chr] =pq.top();
-                while(!pq.empty() && leav<=arr){
-                    auto [lv,chr] =pq.top();
-                    kursi.push(chr);
-                    pq.pop();
-                    leav=lv;
-                }
+            // if(!pq.empty()){//vacant all the chairs that are possibly to leave
+            //     auto [leav,chr] =pq.top();
+
+            while(!pq.empty() && pq.top().first <= arr){
+                kursi.push(pq.top().second);
+                pq.pop();
             }
+            // }
             //we have to give him chair
             //chair availibel
             if(!kursi.empty()){
