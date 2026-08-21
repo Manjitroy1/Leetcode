@@ -1,22 +1,23 @@
 class Solution {
 public:
     bool checkSubarraySum(vector<int>& nums, int k) {
-        
-        unordered_map<int,int>mpp;
         int n=nums.size();
-
+        unordered_map<int,int>mpp;
+        mpp[0]=-1;
+        //store the index of remainder that comes earliest
         int sum=0;
-        // mpp[0]=1;
         for(int i=0;i<n;i++){
             sum+=nums[i];
+            int rem=sum%k;
 
-            int m=sum/k;
-            for(int j=0;j<=m;j++){
-                int need= sum - (j*k);
-                if(mpp.count(need)) return true;
+            if(mpp.count(rem)){
+                if(i-mpp[rem] >=2) return true;
             }
-            mpp[sum]++;
+            else{
+                mpp[rem]=i;
+            }
         }
+        
         return false;
     }
 };
