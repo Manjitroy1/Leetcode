@@ -34,12 +34,18 @@ public:
         vector<bool>ans(q,false);
         if(threshold>=n) return ans;
 
-        for(int i=1;i<=n;i++){
-            for(int j=i+1;j<=n;j++){
-                int g= __gcd(i,j);
-                if(g>threshold){
-                    dsu.unite(i,j);
-                }
+        // for(int i=1;i<=n;i++){
+        //     for(int j=i+1;j<=n;j++){
+        //         int g= __gcd(i,j);
+        //         if(g>threshold){
+        //             dsu.unite(i,j);
+        //         }
+        //     }
+        // }
+
+        for(int d=threshold+1;d<n;d++){
+            for(int mul=2*d;mul<=n;mul+=d){
+                dsu.unite(d,mul);
             }
         }
 
