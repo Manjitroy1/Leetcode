@@ -70,9 +70,9 @@ Please notice that there can be multiple queries for the same pair of nodes [x, 
 ## Solution
 
 **Language:** C++  
-**Runtime:** 2801 ms (beats 5.20%)  
-**Memory:** 70.2 MB (beats 54.14%)  
-**Submitted:** 2026-08-22T13:33:18.814Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 70.1 MB (beats 86.29%)  
+**Submitted:** 2026-08-22T13:39:00.649Z  
 
 ```cpp
 class DSU{
@@ -111,12 +111,18 @@ public:
         vector<bool>ans(q,false);
         if(threshold>=n) return ans;
 
-        for(int i=1;i<=n;i++){
-            for(int j=i+1;j<=n;j++){
-                int g= __gcd(i,j);
-                if(g>threshold){
-                    dsu.unite(i,j);
-                }
+        // for(int i=1;i<=n;i++){
+        //     for(int j=i+1;j<=n;j++){
+        //         int g= __gcd(i,j);
+        //         if(g>threshold){
+        //             dsu.unite(i,j);
+        //         }
+        //     }
+        // }
+
+        for(int d=threshold+1;d<n;d++){
+            for(int mul=2*d;mul<=n;mul+=d){
+                dsu.unite(d,mul);
             }
         }
 
