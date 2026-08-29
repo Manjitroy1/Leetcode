@@ -2,6 +2,8 @@ class Solution {
 public:
     int solve(vector<int>&nums){
         int n=nums.size();
+        if(n<=1)return 0;
+        if(n==2) (nums[0]==nums[1])? 1:0;
         int cnt=0;
         vector<int>pref(n);
         vector<int>suff(n);
