@@ -87,15 +87,17 @@ There are no valid split positions. Thus, the answer is 0.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 652 ms (beats 55.56%)  
-**Memory:** 571.6 MB (beats 11.11%)  
-**Submitted:** 2026-08-29T15:42:14.481Z  
+**Runtime:** 657 ms (beats 55.56%)  
+**Memory:** 571.5 MB (beats 22.22%)  
+**Submitted:** 2026-08-29T15:49:43.038Z  
 
 ```cpp
 class Solution {
 public:
     int solve(vector<int>&nums){
         int n=nums.size();
+        if(n<=1)return 0;
+        if(n==2) (nums[0]==nums[1])? 1:0;
         int cnt=0;
         vector<int>pref(n);
         vector<int>suff(n);
