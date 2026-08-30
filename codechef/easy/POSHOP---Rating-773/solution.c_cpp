@@ -1,0 +1,48 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int brute(vector<int>&cost){
+    int n=cost.size();
+    
+    int ans=0;
+    for(int i=0;i<n;i++){
+        for(int j=i+1;j<n;i++){
+            if(cost[i]<=cost[j]){
+                ans= max(ans,cost[i]+cost[j]);
+            }
+        }
+    }
+    return ans;
+}
+int solve(vector<int>&cost){
+    int n=cost.size();
+    if(n==1) return cost[0];
+    
+    priority_queue<int>pq;
+    int ans=*max_element(cost.begin(),cost.end());
+    
+    pq.push(cost[n-1]);
+    
+    for(int i=n-2;i>=0;i--){
+        int num=pq.top();
+        if(num>=cost[i]){
+            ans=max(ans,cost[i]+num);
+        }
+        pq.push(cost[i]);
+    }
+    return ans;
+}
+int main() {
+    int t;
+    cin>>t;
+    while(t--){
+        int n;
+        cin>>n;
+        vector<int>cost(n);
+        for(int i=0;i<n;i++) cin>>cost[i];
+        
+        int ans=solve(cost);
+        cout<<ans<<endl;
+    }
+    return 0;
+}
