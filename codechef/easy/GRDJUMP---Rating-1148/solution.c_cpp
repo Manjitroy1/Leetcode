@@ -1,0 +1,51 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int solve(int x,int y,int p,int q,int r,vector<vector<int>>&dp){
+    if(x==0 && y==0) return 0;
+    if(x<0 || y<0) return 1e9;
+    
+    if(dp[x][y]!=-1) return dp[x][y];
+    int ans=1e9;
+    int right = p + min(solve(x-1,y,p,q,r,dp),solve(x-2,y,p,q,r,dp));
+    int up =q+ min(solve(x,y-1,p,q,r,dp),solve(x,y-2,p,q,r,dp));
+    int both =r+ solve(x-1,y-1, p,q,r,dp);
+    
+    ans = min(right,min(up,both));
+    return dp[x][y]=ans;
+}
+
+// int tabu(int a,int b,int p,int q,int r){
+//     vector<vector<int>>dp(a+1,vector<int>dp(b+1,1e9));
+//     dp[0][0]=0;
+    
+//     for(int x=0;x<=a;x++){
+//         for(int y=0;y<=b;y++){
+//             if(x==0 && y==0) continue;
+            
+//             int ans=1e9;
+//             int right = (x>=2)? (p + min(dp[x-1][y],dp[x-2][y])) : 1e9;
+//             int up =(y>=2)? (q+ min(dp[x][y-1],dp[x][y-2])) : 1e9;
+//             int both =(x>=1 && y>=1)? (r+ dp[x-1][y-1]) : 1e9;
+            
+//             ans=min(right,min(up,both));
+//             dp[x][y]=ans;
+//         }
+//     }
+//     return dp[a][b];
+// }
+
+int main() {
+	int t;
+	cin>>t;
+	while(t--){
+	    int a,b,p,q,r;
+	    cin>>a>>b>>p>>q>>r;
+	    //target a,b start 0,0
+	    vector<vector<int>>dp(a+1,vector<int>(b+1,-1));
+	    int ans= solve(a,b,p,q,r,dp);
+	    cout<<ans<<endl;
+	}
+	return 0;
+
+}
