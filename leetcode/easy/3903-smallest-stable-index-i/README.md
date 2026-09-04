@@ -68,31 +68,40 @@ At index 0, the instability score is `0 - 0 = 0`, which is less than or equal to
 
 **Language:** C++  
 **Runtime:** 0 ms (beats 100.00%)  
-**Memory:** 31.6 MB (beats 5.99%)  
-**Submitted:** 2026-09-04T18:42:34.314Z  
+**Memory:** 31 MB (beats 72.92%)  
+**Submitted:** 2026-09-04T18:45:22.292Z  
 
 ```cpp
 class Solution {
 public:
-    int firstStableIndex(vector<int>& nums, int k) {
+    int brute(vector<int>& nums, int k) {
         int n=nums.size();
-        vector<int>mx(n,0);
+        // vector<int>mx(n,0);
         vector<int>mn(n,INT_MAX);
         
-        mx[0]=nums[0];
-        for(int i=1;i<n;i++){
-            mx[i]=max(mx[i-1],nums[i]);
-        }
+        // mx[0]=nums[0];
+        // for(int i=1;i<n;i++){
+        //     mx[i]=max(mx[i-1],nums[i]);
+        // }
         mn[n-1]=nums[n-1];
         for(int i=n-2;i>=0;i--){
             mn[i]=min(mn[i+1],nums[i]);
         }
+        int mx=0;
         for(int i=0;i<n;i++){
-            if(mx[i]-mn[i]<=k){
+            mx=max(mx,nums[i]);
+            if(mx-mn[i]<=k){
                 return i;
             }
+
         }
         return -1;
+    }
+
+    int firstStableIndex(vector<int>& nums, int k) {
+        int n=nums.size();
+        return brute(nums,k);
+        
     }
 };
 ```
