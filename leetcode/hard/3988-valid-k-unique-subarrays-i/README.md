@@ -60,9 +60,9 @@ Thus, `ans = [true, false]`.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 1641 ms (beats 7.09%)  
-**Memory:** 419.6 MB (beats 6.26%)  
-**Submitted:** 2026-09-05T17:52:27.769Z  
+**Runtime:** 1600 ms (beats 7.32%)  
+**Memory:** 419.7 MB (beats 6.15%)  
+**Submitted:** 2026-09-05T17:58:27.070Z  
 
 ```cpp
 class Solution {
@@ -91,6 +91,24 @@ public:
         int oddfreq=0;
         int currl=0;
         int currr=-1;
+        
+        auto add=[&](int pos){
+            int x=nums[pos];
+            
+            freq[x]++;
+            if(freq[x]%2==1) oddfreq++;
+            else oddfreq--;
+        };
+        
+        auto remove= [&](int pos){
+            int x=nums[pos];
+            
+            if(freq[x]%2==1) oddfreq--;
+            else oddfreq++;
+            
+            freq[x]--;
+            if(freq[x]==0) freq.erase(x);
+        };
 
         for(int i=0;i<q;i++){
             
@@ -100,31 +118,35 @@ public:
 
             while(currl>l){ //l move to left
                 currl--;
-                freq[nums[currl]]++;
-                if(freq[nums[currl]]%2==1) oddfreq++;
-                else oddfreq--;
+                // freq[nums[currl]]++;
+                // if(freq[nums[currl]]%2==1) oddfreq++;
+                // else oddfreq--;
+                add(currl);
             }
             while(currr<r){ //r move to right
                 currr++;
-                freq[nums[currr]]++;
-                if(freq[nums[currr]]%2==1) oddfreq++;
-                else oddfreq--;
+                add(currr);
+                // freq[nums[currr]]++;
+                // if(freq[nums[currr]]%2==1) oddfreq++;
+                // else oddfreq--;
                 
             }
             while(currl<l){
-                if(freq[nums[currl]]%2==1) oddfreq--;
-                else oddfreq++;
+                // if(freq[nums[currl]]%2==1) oddfreq--;
+                // else oddfreq++;
                 
-                freq[nums[currl]]--;
-                if(freq[nums[currl]]==0) freq.erase(nums[currl]);
+                // freq[nums[currl]]--;
+                // if(freq[nums[currl]]==0) freq.erase(nums[currl]);
+                remove(currl);
                 currl++;
             }
             while(currr>r){
-                if(freq[nums[currr]]%2==1) oddfreq--;
-                else oddfreq++;
+                remove(currr);
+                // if(freq[nums[currr]]%2==1) oddfreq--;
+                // else oddfreq++;
                 
-                freq[nums[currr]]--;
-                if(freq[nums[currr]]==0) freq.erase(nums[currr]);
+                // freq[nums[currr]]--;
+                // if(freq[nums[currr]]==0) freq.erase(nums[currr]);
                 
                 currr--;
             }
