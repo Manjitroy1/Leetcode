@@ -70,8 +70,8 @@ No cyclic rotation is good because the two sums are equal for every rotation. Th
 
 **Language:** C++  
 **Runtime:** 0 ms  
-**Memory:** 8.2 MB  
-**Submitted:** 2026-09-06T08:13:02.522Z  
+**Memory:** 9.3 MB  
+**Submitted:** 2026-09-06T08:13:11.267Z  
 
 ```cpp
 #define ll long long
