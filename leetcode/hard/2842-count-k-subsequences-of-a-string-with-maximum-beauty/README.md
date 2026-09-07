@@ -71,8 +71,8 @@ Hence, the answer is 2.
 
 **Language:** C++  
 **Runtime:** 0 ms  
-**Memory:** 8.1 MB  
-**Submitted:** 2026-09-07T11:09:20.511Z  
+**Memory:** 8 MB  
+**Submitted:** 2026-09-07T11:10:12.579Z  
 
 ```cpp
 #define ll long long
@@ -149,7 +149,7 @@ public:
         ans= (ans*ways)%mod;
 
         for(int i=0;i<need;i++){
-            ans=(ans*x);
+            ans=(ans*x)%mod;
         }
         return ans;
     }
