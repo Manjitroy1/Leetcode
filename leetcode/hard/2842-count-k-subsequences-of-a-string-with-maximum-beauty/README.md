@@ -70,9 +70,9 @@ Hence, the answer is 2.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 8 MB  
-**Submitted:** 2026-09-07T11:10:12.579Z  
+**Runtime:** 16 ms (beats 26.79%)  
+**Memory:** 17.2 MB (beats 33.04%)  
+**Submitted:** 2026-09-07T11:10:18.309Z  
 
 ```cpp
 #define ll long long
