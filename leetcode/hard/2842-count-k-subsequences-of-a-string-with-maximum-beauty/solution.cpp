@@ -72,7 +72,7 @@ public:
         ans= (ans*ways)%mod;
 
         for(int i=0;i<need;i++){
-            ans=(ans*x);
+            ans=(ans*x)%mod;
         }
         return ans;
     }
