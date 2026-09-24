@@ -27,7 +27,7 @@ Explanation: The elimination order is 3 → 6 → 2 → 7 → 5 → 1, and the p
 **Language:** C++  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-24T06:05:12.886Z  
+**Submitted:** 2026-09-24T06:10:28.625Z  
 
 ```cpp
 class Solution {
@@ -48,11 +48,25 @@ class Solution {
         }
         return person[0];
     }
-    // int solveq(int n,int k){
-        
-    // }
+    int solveq(int n,int k){
+        queue<int>q;
+        for(int i=1;i<=n;i++){
+            q.push(i);
+        }
+        while(q.size()>1){
+            //we will take k-1 element from the top and push to the queue
+            for(int cnt=1;cnt<=k-1;cnt++){
+                q.push(q.front());
+                q.pop();
+            }
+            q.pop(); //pop the kth element
+        }
+        return q.front();
+    }
+    
     int josephus(int n, int k) {
-        return solve(n,k);
+        // return solve(n,k);
+        return solveq(n,k);
     }
     
 };
