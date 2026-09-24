@@ -40,11 +40,32 @@ class Solution {
         int y= (x+k) % n;
         return y;
     }
+    int tabu(int n,int k){
+        vector<int>dp(n+1,k);
+        dp[1]=0;
+        
+        for(int i=2;i<=n;i++){
+            dp[i]=(dp[i-1]+k) % i;
+        }
+        return dp[n];
+    }
+    
+    int spopt(int n,int k){
+        int prev=0;
+        
+        for(int i=2;i<=n;i++){
+            int curr = (prev+k) % i;
+            prev=curr;
+        }
+        return prev;
+    }
     
     int josephus(int n, int k) {
         // return solve(n,k);
         // return solveq(n,k);
-        return opt(n,k) +1 ; 
+        // return opt(n,k) +1 ; 
+        // return tabu(n,k)+1;
+        return spopt(n,k)+1;
     }
     
 };
