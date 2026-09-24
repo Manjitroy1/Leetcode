@@ -27,7 +27,7 @@ Explanation: The elimination order is 3 → 6 → 2 → 7 → 5 → 1, and the p
 **Language:** C++  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-24T06:10:28.625Z  
+**Submitted:** 2026-09-24T06:26:54.793Z  
 
 ```cpp
 class Solution {
@@ -64,9 +64,19 @@ class Solution {
         return q.front();
     }
     
+    int opt(int n,int k){ //return 0 based answer
+    
+        //we can go with recursion
+        if(n==1) return 0;
+        int x= opt(n-1,k);
+        int y= (x+k) % n;
+        return y;
+    }
+    
     int josephus(int n, int k) {
         // return solve(n,k);
-        return solveq(n,k);
+        // return solveq(n,k);
+        return opt(n,k) +1 ; 
     }
     
 };
