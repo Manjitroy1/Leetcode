@@ -27,7 +27,7 @@ Explanation: The elimination order is 3 → 6 → 2 → 7 → 5 → 1, and the p
 **Language:** C++  
 **Runtime:** N/A  
 **Memory:** N/A  
-**Submitted:** 2026-09-24T06:26:54.793Z  
+**Submitted:** 2026-09-24T06:33:29.914Z  
 
 ```cpp
 class Solution {
@@ -72,11 +72,32 @@ class Solution {
         int y= (x+k) % n;
         return y;
     }
+    int tabu(int n,int k){
+        vector<int>dp(n+1,k);
+        dp[1]=0;
+        
+        for(int i=2;i<=n;i++){
+            dp[i]=(dp[i-1]+k) % i;
+        }
+        return dp[n];
+    }
+    
+    int spopt(int n,int k){
+        int prev=0;
+        
+        for(int i=2;i<=n;i++){
+            int curr = (prev+k) % i;
+            prev=curr;
+        }
+        return prev;
+    }
     
     int josephus(int n, int k) {
         // return solve(n,k);
         // return solveq(n,k);
-        return opt(n,k) +1 ; 
+        // return opt(n,k) +1 ; 
+        // return tabu(n,k)+1;
+        return spopt(n,k)+1;
     }
     
 };
