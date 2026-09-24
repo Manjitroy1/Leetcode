@@ -32,9 +32,19 @@ class Solution {
         return q.front();
     }
     
+    int opt(int n,int k){ //return 0 based answer
+    
+        //we can go with recursion
+        if(n==1) return 0;
+        int x= opt(n-1,k);
+        int y= (x+k) % n;
+        return y;
+    }
+    
     int josephus(int n, int k) {
         // return solve(n,k);
-        return solveq(n,k);
+        // return solveq(n,k);
+        return opt(n,k) +1 ; 
     }
     
 };
