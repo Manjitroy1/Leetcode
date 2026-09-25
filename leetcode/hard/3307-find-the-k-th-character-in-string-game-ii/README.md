@@ -61,8 +61,8 @@ Initially, `word == "a"`. Alice performs the four operations as follows:
 
 **Language:** C++  
 **Runtime:** 0 ms  
-**Memory:** 8.3 MB  
-**Submitted:** 2026-09-25T17:32:53.082Z  
+**Memory:** 8.5 MB  
+**Submitted:** 2026-09-25T17:33:02.858Z  
 
 ```cpp
 class Solution {
@@ -82,7 +82,7 @@ public:
 
        for(int i=last-1;i>=0;i--){
             long long half= len/2;
-            if(k>half){
+            if(k>=half){
                 if(operations[i]){
                     cnt++;
                     cnt%=26;
