@@ -52,9 +52,9 @@ Output: 0
 ## Solution
 
 **Language:** C++  
-**Runtime:** 24 ms (beats 75.84%)  
-**Memory:** 60.3 MB (beats 92.16%)  
-**Submitted:** 2026-08-20T06:17:19.943Z  
+**Runtime:** 37 ms (beats 43.03%)  
+**Memory:** 60.5 MB (beats 52.08%)  
+**Submitted:** 2026-09-25T17:49:33.311Z  
 
 ```cpp
 class Solution {
@@ -69,6 +69,7 @@ public:
 
         priority_queue<int>pq;
         int timetaken=0;
+        int ans=0;
 
         for(int i=0;i<n;i++){
             if(courses[i][0]>courses[i][1]) continue;
@@ -81,9 +82,9 @@ public:
                 timetaken-=pq.top();
                 pq.pop();
             }
-
+            ans=max(ans,(int)pq.size());
         }  
-        return pq.size();
+        return ans;
     }
 };
 ```
