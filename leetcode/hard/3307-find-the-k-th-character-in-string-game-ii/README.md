@@ -60,9 +60,9 @@ Initially, `word == "a"`. Alice performs the four operations as follows:
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 8.4 MB  
-**Submitted:** 2026-09-25T17:38:51.464Z  
+**Runtime:** 0 ms (beats 100.00%)  
+**Memory:** 28.4 MB (beats 52.24%)  
+**Submitted:** 2026-09-25T17:39:49.978Z  
 
 ```cpp
 class Solution {
