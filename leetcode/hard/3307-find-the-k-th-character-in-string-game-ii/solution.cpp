@@ -1,29 +1,36 @@
 class Solution {
 public:
     char kthCharacter(long long k, vector<int>& operations) {
-        k--;
-        int n=operations.size();
-        long long len =1;
-        int last=0;
-        while(last<n && len<k){
-            len*=2;
-            last++;
+
+        int n = operations.size();
+
+        // Length after all operations
+        __int128 len = 1;
+
+        for (int i = 0; i < n; i++) {
+            len *= 2;
         }
 
-        int cnt=0;
-        char ans='a';
+        int cnt = 0;
 
-       for(int i=last-1;i>=0;i--){
-            long long half= len/2;
-            if(k>=half){
-                if(operations[i]){
+        // Work backwards
+        for (int i = n - 1; i >= 0; i--) {
+
+            __int128 half = len / 2;
+
+            if ((__int128)k > half) {
+
+                // k lies in the second half
+                k -= (long long)half;
+
+                if (operations[i] == 1)
                     cnt++;
-                    cnt%=26;
-                }
-                k-=half;
-                len=half;
             }
-       }
-       return 'a'+cnt;
+
+            // Move to the previous string
+            len = half;
+        }
+
+        return char('a' + (cnt % 26));
     }
 };
