@@ -65,14 +65,14 @@ It can be shown that the tasks cannot be completed in less than 6 days.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 64 ms (beats 47.29%)  
-**Memory:** 102.4 MB (beats 98.25%)  
-**Submitted:** 2026-09-25T18:07:01.637Z  
+**Runtime:** 47 ms (beats 96.18%)  
+**Memory:** 106.1 MB (beats 48.73%)  
+**Submitted:** 2026-09-25T18:18:29.012Z  
 
 ```cpp
 class Solution {
 public:
-    long long taskSchedulerII(vector<int>& tasks, int space) {
+ long long solve(vector<int>& tasks, int space) {
         //map to store last time it was done
         unordered_map<int,int>mpp;
         int n=tasks.size();
@@ -93,6 +93,24 @@ public:
             }
         }
         return time-1;
+    }
+    long long taskSchedulerII(vector<int>& tasks, int space) {
+        long long time=0;
+        int n=tasks.size();
+        unordered_map<int,long long>mpp; //tasks, time
+        
+        for(int& t:tasks){
+            auto it=mpp.find(t);
+
+            if(it!=mpp.end()){
+                long long next=it->second+space;
+                time=max(time,next);
+            }
+            
+            mpp[t]=++time;
+
+        }
+        return time;
     }
 };
 ```
