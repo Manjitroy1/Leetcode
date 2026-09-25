@@ -10,6 +10,7 @@ public:
 
         priority_queue<int>pq;
         int timetaken=0;
+        int ans=0;
 
         for(int i=0;i<n;i++){
             if(courses[i][0]>courses[i][1]) continue;
@@ -22,8 +23,8 @@ public:
                 timetaken-=pq.top();
                 pq.pop();
             }
-
+            ans=max(ans,(int)pq.size());
         }  
-        return pq.size();
+        return ans;
     }
 };
