@@ -15,7 +15,7 @@ public:
 
        for(int i=last-1;i>=0;i--){
             long long half= len/2;
-            if(k>half){
+            if(k>=half){
                 if(operations[i]){
                     cnt++;
                     cnt%=26;
