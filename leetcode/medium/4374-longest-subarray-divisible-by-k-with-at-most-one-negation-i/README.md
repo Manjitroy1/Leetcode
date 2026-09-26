@@ -65,9 +65,9 @@ A  **subarray**  is a contiguous, non-empty sequence of elements within an array
 ## Solution
 
 **Language:** C++  
-**Runtime:** 219 ms (beats 74.96%)  
-**Memory:** 208.4 MB (beats 73.47%)  
-**Submitted:** 2026-09-26T16:18:41.694Z  
+**Runtime:** 215 ms (beats 75.42%)  
+**Memory:** 208.3 MB (beats 73.47%)  
+**Submitted:** 2026-09-26T16:21:30.884Z  
 
 ```cpp
 class Solution {
@@ -79,6 +79,9 @@ public:
         }
         int ans=0;
         vector<int>seen(k,0);
+        //we can initiase every time inside ith loop
+        //but it is costly k*n 10^8
+        //better to revise the newvals
         
         for(int i=0;i<n;i++){
             int sum=0;
