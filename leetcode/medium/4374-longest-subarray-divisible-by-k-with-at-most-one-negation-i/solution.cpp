@@ -7,6 +7,9 @@ public:
         }
         int ans=0;
         vector<int>seen(k,0);
+        //we can initiase every time inside ith loop
+        //but it is costly k*n 10^8
+        //better to revise the newvals
         
         for(int i=0;i<n;i++){
             int sum=0;
