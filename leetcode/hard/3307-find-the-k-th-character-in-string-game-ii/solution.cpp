@@ -1,36 +1,21 @@
 class Solution {
 public:
     char kthCharacter(long long k, vector<int>& operations) {
-
-        int n = operations.size();
-
-        // Length after all operations
-        __int128 len = 1;
-
-        for (int i = 0; i < n; i++) {
-            len *= 2;
-        }
-
-        int cnt = 0;
-
-        // Work backwards
-        for (int i = n - 1; i >= 0; i--) {
-
-            __int128 half = len / 2;
-
-            if ((__int128)k > half) {
-
-                // k lies in the second half
-                k -= (long long)half;
-
-                if (operations[i] == 1)
-                    cnt++;
+        long long index = k - 1; // Convert to 0-based index
+        int total_shifts = 0;
+        
+        for (int i = 0; i < operations.size(); i++) {
+            // Check if the i-th bit of the index is 1
+            if ((index >> i) & 1) {
+                total_shifts += operations[i];
             }
-
-            // Move to the previous string
-            len = half;
+            
+            // Optional optimization: Stop early if index has no more 1-bits
+            if ((index >> i) == 0) {
+                break;
+            }
         }
-
-        return char('a' + (cnt % 26));
+        
+        return 'a' + (total_shifts % 26);
     }
 };
