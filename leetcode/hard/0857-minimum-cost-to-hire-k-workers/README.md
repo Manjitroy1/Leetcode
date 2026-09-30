@@ -44,9 +44,9 @@ Explanation: We pay 4 to 0th worker, 13.33333 to 2nd and 3rd workers separately.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 2 ms  
-**Memory:** 8.6 MB  
-**Submitted:** 2026-09-30T10:39:32.934Z  
+**Runtime:** 0 ms  
+**Memory:** 13.3 MB  
+**Submitted:** 2026-09-30T10:39:40.465Z  
 
 ```cpp
 class Solution {
