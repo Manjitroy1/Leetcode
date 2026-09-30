@@ -2,9 +2,9 @@
 
 # 🧠 Coding Solutions
 
-![Total Solved](https://img.shields.io/badge/Total_Solved-257-blue?style=for-the-badge)
+![Total Solved](https://img.shields.io/badge/Total_Solved-260-blue?style=for-the-badge)
 ![Streak](https://img.shields.io/badge/Streak-1_days-orange?style=for-the-badge)
-![Last Synced](https://img.shields.io/badge/Last_Synced-30--09--2026-green?style=for-the-badge)
+![Last Synced](https://img.shields.io/badge/Last_Synced-01--10--2026-green?style=for-the-badge)
 
 > 🚀 Auto-synced by [**PushMyCode**](https://github.com/PushMyCode-HQ) — solve it, forget it, it's on GitHub.
 
@@ -18,14 +18,14 @@
 |:---:|:---:|
 | 🟢 Easy | **20** |
 | 🟡 Medium | **107** |
-| 🔴 Hard | **130** |
-| **Total** | **257** |
+| 🔴 Hard | **133** |
+| **Total** | **260** |
 
 ## 🛠️ Languages
 
 | Language | Solutions |
 |:---:|:---:|
-| C++ | **233** |
+| C++ | **236** |
 | SQL | **18** |
 | c_cpp | **6** |
 
