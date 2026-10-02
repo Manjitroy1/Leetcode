@@ -54,9 +54,9 @@ Number of valid subsequences (63 - 2 = 61).
 ## Solution
 
 **Language:** C++  
-**Runtime:** 28 ms (beats 73.44%)  
-**Memory:** 56.2 MB (beats 15.09%)  
-**Submitted:** 2026-10-02T09:53:07.525Z  
+**Runtime:** 0 ms  
+**Memory:** 8.2 MB  
+**Submitted:** 2026-10-02T09:55:00.994Z  
 
 ```cpp
 class Solution {
@@ -74,11 +74,10 @@ public:
         while(j>=0 && nums[j]>target){
             j--;
         }
-        vector<long long>pow2(n,1);
-        long long p=1;
+        vector<long long>pow2(n);
+        pow2[0]=1;        
         for(int i=1;i<n;i++){
-            p= (p*2) % mod;
-            pow2[i]=p;
+            pow2[i]=(pow2[i-1]*2) % mod;
         }
         while(i<=j){
             if(nums[i]+nums[j]<=target){
