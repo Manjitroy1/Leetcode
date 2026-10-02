@@ -55,8 +55,8 @@ Number of valid subsequences (63 - 2 = 61).
 
 **Language:** C++  
 **Runtime:** 0 ms  
-**Memory:** 8.2 MB  
-**Submitted:** 2026-10-02T09:55:00.994Z  
+**Memory:** 8.4 MB  
+**Submitted:** 2026-10-02T09:55:12.072Z  
 
 ```cpp
 class Solution {
