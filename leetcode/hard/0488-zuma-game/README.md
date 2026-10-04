@@ -66,9 +66,9 @@ Explanation: To make the board empty:
 ## Solution
 
 **Language:** C++  
-**Runtime:** 1768 ms (beats 5.00%)  
-**Memory:** 305.5 MB (beats 5.80%)  
-**Submitted:** 2026-10-04T17:37:16.380Z  
+**Runtime:** 1795 ms (beats 5.00%)  
+**Memory:** 305.8 MB (beats 5.80%)  
+**Submitted:** 2026-10-04T17:40:03.622Z  
 
 ```cpp
 class Solution {
