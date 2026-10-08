@@ -38,6 +38,7 @@ public:
 
     }
     int query(int l,int r){
+        if(l>r) return 0;
         return query(0,0,h-1,l,r);
     }
 };
@@ -66,7 +67,7 @@ public:
         int total = 1e5+1;
         SGT first(total);
 
-        vector<int>dp(n,0);
+        // vector<int>dp(n,0);
         int ans=1;
         for(int i=0;i<n;i++){
             int v= nums[i];
@@ -75,11 +76,13 @@ public:
             int right = v-1;
             int mx= first.query(left,right); //maximum value in this range
 
-            if(dp[i] < 1+mx){
-                dp[i]= 1+mx;
-                ans= max(ans,dp[i]);
-                first.update(v,dp[i]);
-            }
+            // if(dp[i] < 1+mx){
+            //     dp[i]= 1+mx;
+            //     ans= max(ans,dp[i]);
+            //     first.update(v,dp[i]);
+            // }
+            ans= max(ans, 1+mx);
+            first.update(v,1+mx);
         }
         return ans;
     }
