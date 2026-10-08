@@ -61,9 +61,9 @@ The subsequence has a length of 1, so we return 1.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 107 ms (beats 33.11%)  
-**Memory:** 195.9 MB (beats 6.94%)  
-**Submitted:** 2026-10-08T09:59:05.988Z  
+**Runtime:** 116 ms (beats 28.86%)  
+**Memory:** 194.4 MB (beats 11.19%)  
+**Submitted:** 2026-10-08T10:02:46.759Z  
 
 ```cpp
 class SGT{
@@ -106,6 +106,7 @@ public:
 
     }
     int query(int l,int r){
+        if(l>r) return 0;
         return query(0,0,h-1,l,r);
     }
 };
@@ -134,7 +135,7 @@ public:
         int total = 1e5+1;
         SGT first(total);
 
-        vector<int>dp(n,0);
+        // vector<int>dp(n,0);
         int ans=1;
         for(int i=0;i<n;i++){
             int v= nums[i];
@@ -143,11 +144,13 @@ public:
             int right = v-1;
             int mx= first.query(left,right); //maximum value in this range
 
-            if(dp[i] < 1+mx){
-                dp[i]= 1+mx;
-                ans= max(ans,dp[i]);
-                first.update(v,dp[i]);
-            }
+            // if(dp[i] < 1+mx){
+            //     dp[i]= 1+mx;
+            //     ans= max(ans,dp[i]);
+            //     first.update(v,dp[i]);
+            // }
+            ans= max(ans, 1+mx);
+            first.update(v,1+mx);
         }
         return ans;
     }
