@@ -7,11 +7,8 @@ public:
     int fr=-1;
     int fc=-1;
     
-    int dfs(int r,int c,int cnt,vector<vector<int>>&grid,vector<vector<bool>>&vis){
-        if(r==fr && c==fc && cnt==total) return 1;
-        if(r==fr && c==fc) return 0;
-        if(cnt==total) return 0;
-
+    int dfs(int r,int c,int cnt,vector<vector<bool>>&vis){
+        if(r==fr && c==fc) return cnt==total;
 
         vis[r][c]=true;
         int ans=0;
@@ -20,7 +17,7 @@ public:
             int vc= c+d.second;
 
             if(vr>=0 && vr<n && vc>=0 && vc<m && !vis[vr][vc]){
-                ans+=dfs(vr,vc,1+cnt,grid,vis);
+                ans+=dfs(vr,vc,1+cnt,vis);
             }
         }
         vis[r][c]=false;
@@ -53,6 +50,6 @@ public:
 
             }
         }
-        return dfs(sr,sc,1,grid,vis);
+        return dfs(sr,sc,1,vis);
     }
 };
