@@ -73,57 +73,54 @@ The total cost is 0 + 0 + 0 + 0 + 1 + 0 + 1 + 0 + 2 = 4.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 182 ms (beats 66.23%)  
-**Memory:** 147.2 MB (beats 40.63%)  
-**Submitted:** 2026-08-26T12:35:43.249Z  
+**Runtime:** 163 ms (beats 87.97%)  
+**Memory:** 146.9 MB (beats 53.37%)  
+**Submitted:** 2026-10-08T06:51:55.800Z  
 
 ```cpp
 class Solution {
 public:
-    int n;
-    vector<int> bit;
-    const long long mod=1e9+7;
+    const int total = 1e5+1;
+    vector<int>bit;
+    const int mod= 1e9+7;
 
-    void update(int id, int val) {
-        while (id <= n) {
-            bit[id] += val;
-            id += id & -id;
+    void update(int idx,int val){
+        while(idx<=total){
+            bit[idx]+=val;
+            idx+=(idx & -idx);
         }
     }
-
-    int query(int id) {
-        int ans = 0;
-
-        while (id > 0) {
-            ans += bit[id];
-            id -= id & -id;
+    int query(int idx){ //sum till this index
+        int ans=0;
+        while(idx>0){
+            ans+=bit[idx];
+            idx-=(idx & -idx);
         }
-
         return ans;
     }
+    int createSortedArray(vector<int>& instructions) {
+        //total number of number less than this 
+        // toal number of number greater than this
+        int n=instructions.size();
 
-    int createSortedArray(vector<int>& ins) {
-        n = 100000;  // maximum value in ins
-        bit.assign(n + 1, 0);
+        bit.resize(total,0);
 
-        long long ans = 0;
+        int cost=0;
+        for(int i=0;i<n;i++){
+            int val=instructions[i];
+            //update
+            //query
+            int smal = query(val-1);
+            int big= i - query(val); 
 
-        for (int i = 0; i < ins.size(); i++) {
-            int x = ins[i];
-
-            // Previous elements strictly smaller than x
-            int smaller = query(x - 1);
-
-            // Previous elements strictly greater than x
-            int greater = i - query(x);
-
-            ans = (ans + min(smaller, greater))%mod;
-
-            // Insert current value
-            update(x, 1);
+            update(val,1);
+            cost= (cost + min(smal,big)) % mod;
         }
 
-        return ans;
+        //apply fenwick tree
+        return cost;
+
+        
     }
 };
 ```
