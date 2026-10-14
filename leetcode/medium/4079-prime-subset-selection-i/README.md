@@ -64,9 +64,9 @@ If no prime can be selected, return an  **empty**  array.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 1 ms  
-**Memory:** 8.4 MB  
-**Submitted:** 2026-10-14T14:14:43.471Z  
+**Runtime:** 0 ms  
+**Memory:** 8.6 MB  
+**Submitted:** 2026-10-14T14:15:02.010Z  
 
 ```cpp
 class Solution {
