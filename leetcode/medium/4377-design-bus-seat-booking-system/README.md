@@ -83,8 +83,8 @@ busBooking.getMinTime(); // return 1. With the best possible booking order, the 
 
 **Language:** C++  
 **Runtime:** 418 ms (beats 7.68%)  
-**Memory:** 303.4 MB (beats 80.60%)  
-**Submitted:** 2026-10-14T14:48:45.583Z  
+**Memory:** 303.6 MB (beats 75.59%)  
+**Submitted:** 2026-10-14T14:58:23.006Z  
 
 ```cpp
 class BusBooking {
