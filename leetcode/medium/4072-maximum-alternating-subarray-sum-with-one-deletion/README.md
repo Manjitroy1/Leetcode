@@ -54,128 +54,63 @@ Choose not to delete an element and select the subarray `[7]`. Its alternating s
 ## Solution
 
 **Language:** C++  
-**Runtime:** 1168 ms (beats 18.22%)  
-**Memory:** 422.3 MB (beats 21.00%)  
-**Submitted:** 2026-10-14T09:00:33.096Z  
+**Runtime:** 1214 ms (beats 14.52%)  
+**Memory:** 422.2 MB (beats 21.51%)  
+**Submitted:** 2026-10-15T08:36:37.094Z  
 
 ```cpp
-// class Solution {
-// public:
-//     long long maxAlternatingSum(vector<int>& nums) {
-//         const long long NEG = LLONG_MIN / 4;
-
-//         // States represent the expected sign of the NEXT kept element.
-//         //
-//         // plus0  : No deletion used, next kept element gets '+'.
-//         // minus0 : No deletion used, next kept element gets '-'.
-//         // plus1  : One deletion used, next kept element gets '+'.
-//         // minus1 : One deletion used, next kept element gets '-'.
-
-//         long long plus0 = NEG, minus0 = NEG;
-//         long long plus1 = NEG, minus1 = NEG;
-
-//         long long ans = NEG;
-
-//         for (int x : nums) {
-//             // Save previous states so every transition uses old values.
-//             long long p0 = plus0;
-//             long long m0 = minus0;
-//             long long p1 = plus1;
-//             long long m1 = minus1;
-
-//             // No deletion used:
-//             // If the next sign is '-', subtract x; next sign becomes '+'.
-//             plus0 = m0 - 1LL * x;
-
-//             // If the next sign is '+', add x; next sign becomes '-'.
-//             // Or start a new subarray with x.
-//             minus0 = max(1LL * x, p0 + 1LL * x);
-
-//             // One deletion used:
-//             // Keep x with a '-' sign, or delete x while expecting '+'.
-//             plus1 = max(m1 - 1LL * x, p0);
-
-//             // Keep x with a '+' sign, or delete x while expecting '-'.
-//             minus1 = max(p1 + 1LL * x, m0);
-
-//             // Find the maximum valid alternating sum.
-//             ans = max({ans, plus0, minus0, plus1, minus1});
-//         }
-
-//         return ans;
-//     }
-// };
-
-
+#define ll long long
 class Solution {
 public:
     long long maxAlternatingSum(vector<int>& nums) {
-        int n = nums.size();
-        const long long NEG = LLONG_MIN / 4;
 
-        // dp[i][parity][isDel]
-        // parity = 0: next kept element gets '+'
-        // parity = 1: next kept element gets '-'
-        // isDel = 0: no deletion used
-        // isDel = 1: one deletion used
-        vector<vector<vector<long long>>> dp(
-            n,
-            vector<vector<long long>>(2, vector<long long>(2, NEG))
-        );
+        // dp[i][parity][deletion used] till index i the max value with 
+        //parity begin 0 1 --> next is + and -
+        //deletion used --> 0 1 still we did not dele as we can delete at most 1
 
-        long long ans = NEG;
+        //for this i start as a new subarray
+        //can be consider for previous value
+        //if del ==0 we can now delete this 1
+        int n=nums.size();
+        ll INF = LLONG_MIN/4;
+        ll ans = INF;
 
-        for (int i = 0; i < n; i++) {
-            long long x = nums[i];
+        vector<vector<vector<ll>>>dp(n,vector<vector<ll>>(2,vector<ll>(2,INF)));
+        for(int i=0;i<n;i++){
+            dp[i][1][0]=nums[i]; //fresh start of a new subarray
 
-            // Start a new subarray at index i.
-            // The first element always gets a positive sign.
-            // After keeping it, the next sign must be negative.
-            dp[i][1][0] = max(dp[i][1][0], x);
+            //we have a prev element only for i>0
+            if(i>0){
+                for(int p=0;p<2;p++){
+                    for(int d=0;d<2;d++){
+                        ll prev = dp[i-1][p][d]; //prev maximum value
+                        if(prev<=INF) continue; // useless
 
-            // Process states from the previous index.
-            if (i > 0) {
-                for (int parity = 0; parity < 2; parity++) {
-                    for (int isDel = 0; isDel < 2; isDel++) {
-                        long long prev = dp[i - 1][parity][isDel];
+                        //accoding to the p nums[i] have + or - val
+                        ll val = (p==0)? prev + nums[i] : prev -nums[i];
 
-                        // Ignore unreachable states.
-                        if (prev == NEG) continue;
+                        //if we take this parity will change
+                        dp[i][1-p][d] =max(dp[i][1-p][d], val);
 
-                        // Choice 1: Keep nums[i].
-                        // parity 0 => add x
-                        // parity 1 => subtract x
-                        long long val = (parity == 0)
-                                            ? prev + x
-                                            : prev - x;
-
-                        // Keeping an element flips the next expected sign.
-                        dp[i][1 - parity][isDel] =
-                            max(dp[i][1 - parity][isDel], val);
-
-                        // Choice 2: Delete nums[i].
-                        // Allowed only if deletion has not been used.
-                        // The sum and parity remain unchanged.
-                        if (isDel == 0) {
-                            dp[i][parity][1] =
-                                max(dp[i][parity][1], prev);
+                        //we cal delete alo
+                        if(d==0){
+                            dp[i][p][1] = max(dp[i][p][1], prev);
                         }
                     }
                 }
             }
+            //
 
-            // The answer may end at any index, with or without deletion.
-            for (int parity = 0; parity < 2; parity++) {
-                for (int isDel = 0; isDel < 2; isDel++) {
-                    ans = max(ans, dp[i][parity][isDel]);
+            //the answer can be at any index
+            for(int p=0;p<2;p++){
+                for(int d=0;d<2;d++){
+                    ans = max(ans,dp[i][p][d]);
                 }
             }
         }
-
         return ans;
     }
 };
-
 ```
 
 ---
