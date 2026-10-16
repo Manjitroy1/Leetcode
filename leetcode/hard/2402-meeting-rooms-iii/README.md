@@ -66,15 +66,15 @@ Room 0 held 1 meeting while rooms 1 and 2 each held 2 meetings, so we return 1.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 109 ms (beats 33.77%)  
-**Memory:** 125.9 MB (beats 38.01%)  
-**Submitted:** 2026-10-16T10:58:07.930Z  
+**Runtime:** 12 ms  
+**Memory:** 36.8 MB  
+**Submitted:** 2026-10-16T12:05:29.229Z  
 
 ```cpp
 #define ll long long
 class Solution {
 public:
-    int mostBooked(int n, vector<vector<int>>& meetings) {
+    int brute(int n, vector<vector<int>>& meetings) {
         //i have unique start time
         //number of rooms is less than 100
 
@@ -120,6 +120,59 @@ public:
             if(room[i][1]==ans){
                 return i;
             }
+        }
+        return 0;
+    }
+    int mostBooked(int n, vector<vector<int>>& meet) {
+        int m=meet.size();
+        sort(meet.begin(),meet.end());
+        //pq contains available room in sorted order
+        priority_queue<int,vector<int>,greater<int>>pq1;
+        
+        //pq contain endtime, room number
+        using t=pair<ll,int>;
+        priority_queue<t,vector<t>,greater<t>>pq2;
+
+        vector<int>room(n,0);
+        int mx=0;
+        //for each room  find the availibale room and push
+        //initially all the rooms are avialibale
+
+        for(int i=0;i<n;i++){
+            pq1.push(i);
+        }
+
+        for(int i=0;i<m;i++){
+            int s=meet[i][0];
+            int e=meet[i][1];
+
+            //check int the pq2 if endtime <= start
+            //potential room
+            while(!pq2.empty() && pq2.top().first <= s){
+                pq1.push(pq2.top().second);
+                pq2.pop();
+            }
+
+            //check if room is availiable
+            if(!pq1.empty()){
+                int r = pq1.top();
+                pq1.pop();
+
+                pq2.push({e,r});
+                room[r]++;
+                mx=max(mx,room[r]);
+            }else{
+                //room is not availibale
+                auto [end,r] = pq2.top();
+                pq2.pop();
+
+                pq2.push({end+(e-s),r});
+                room[r]++;
+                mx=max(mx,room[r]);
+            }
+        }
+        for(int i=0;i<n;i++){
+            if(room[i]==mx) return i;
         }
         return 0;
     }
