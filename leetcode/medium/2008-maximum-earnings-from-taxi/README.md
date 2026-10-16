@@ -50,9 +50,9 @@ We earn 9 + 5 + 6 = 20 dollars in total.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 89 ms (beats 43.76%)  
-**Memory:** 155.1 MB (beats 15.70%)  
-**Submitted:** 2026-10-16T09:30:47.259Z  
+**Runtime:** 96 ms (beats 33.98%)  
+**Memory:** 155 MB (beats 18.82%)  
+**Submitted:** 2026-10-16T09:32:41.461Z  
 
 ```cpp
 #define ll long long
@@ -78,9 +78,10 @@ public:
         for(int e=2;e<=n;e++){
             dp[e]=dp[e-1];
             
-            if(stops[e].empty()){ //nothing stops at this 
-                continue;
-            }
+            // if(stops[e].empty()){ //nothing stops at this 
+            //     continue;
+            // }
+            
             //check for all possible starts
             ll mx=0;
             for(auto& [s,t] : stops[e]){
