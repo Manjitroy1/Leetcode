@@ -1,6 +1,8 @@
 class Solution {
 public:
     int numBusesToDestination(vector<vector<int>>& routes, int source, int target) {
+        if(source==target) return 0;
+
         //build the graph
         int n=routes.size();
         // vector<vector<int>>adj(n);
@@ -39,11 +41,10 @@ public:
         }
         int ans = 1e9;
         if(!mpp.count(source) || !mpp.count(target)) return -1; //source or target not in the mpp
-        if(source==target) return 0;
 
         for(int& u: mpp[source]){
             for(int& v:mpp[target]){
-                // if(u==v) return 0;
+                if(u==v) return 1;
                 //find the shortest dis from u to v
                 ans = min(ans, dis[u][v]);
             }
