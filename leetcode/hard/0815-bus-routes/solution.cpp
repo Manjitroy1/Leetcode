@@ -40,9 +40,10 @@ public:
         int ans = 1e9;
         if(!mpp.count(source) || !mpp.count(target)) return -1; //source or target not in the mpp
         if(source==target) return 0;
-        
+
         for(int& u: mpp[source]){
             for(int& v:mpp[target]){
+                // if(u==v) return 0;
                 //find the shortest dis from u to v
                 ans = min(ans, dis[u][v]);
             }
