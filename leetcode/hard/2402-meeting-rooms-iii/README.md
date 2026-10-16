@@ -66,9 +66,9 @@ Room 0 held 1 meeting while rooms 1 and 2 each held 2 meetings, so we return 1.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 12 ms  
-**Memory:** 36.8 MB  
-**Submitted:** 2026-10-16T12:05:29.229Z  
+**Runtime:** 92 ms (beats 49.74%)  
+**Memory:** 125.4 MB (beats 99.88%)  
+**Submitted:** 2026-10-16T12:05:35.917Z  
 
 ```cpp
 #define ll long long
