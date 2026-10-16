@@ -47,9 +47,9 @@ Output: -1
 ## Solution
 
 **Language:** C++  
-**Runtime:** 0 ms  
-**Memory:** 8.3 MB  
-**Submitted:** 2026-10-16T17:34:22.589Z  
+**Runtime:** 1 ms  
+**Memory:** 8.5 MB  
+**Submitted:** 2026-10-16T17:37:05.872Z  
 
 ```cpp
 class Solution {
@@ -94,9 +94,10 @@ public:
         int ans = 1e9;
         if(!mpp.count(source) || !mpp.count(target)) return -1; //source or target not in the mpp
         if(source==target) return 0;
-        
+
         for(int& u: mpp[source]){
             for(int& v:mpp[target]){
+                // if(u==v) return 0;
                 //find the shortest dis from u to v
                 ans = min(ans, dis[u][v]);
             }
