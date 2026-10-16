@@ -21,9 +21,10 @@ public:
         for(int e=2;e<=n;e++){
             dp[e]=dp[e-1];
             
-            if(stops[e].empty()){ //nothing stops at this 
-                continue;
-            }
+            // if(stops[e].empty()){ //nothing stops at this 
+            //     continue;
+            // }
+            
             //check for all possible starts
             ll mx=0;
             for(auto& [s,t] : stops[e]){
