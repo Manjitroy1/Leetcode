@@ -64,9 +64,9 @@ Since 2 is already a prime, we can't make `n` equal to `m`.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 1 ms  
-**Memory:** 7.9 MB  
-**Submitted:** 2026-10-26T17:27:05.766Z  
+**Runtime:** 159 ms (beats 59.29%)  
+**Memory:** 15.1 MB (beats 86.43%)  
+**Submitted:** 2026-10-26T17:27:07.712Z  
 
 ```cpp
 class Solution {
