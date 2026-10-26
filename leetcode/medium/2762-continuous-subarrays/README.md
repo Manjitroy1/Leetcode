@@ -54,15 +54,15 @@ Total continuous subarrays = 3 + 2 + 1 = 6.
 ## Solution
 
 **Language:** C++  
-**Runtime:** 243 ms (beats 6.47%)  
-**Memory:** 155.9 MB (beats 18.30%)  
-**Submitted:** 2026-10-26T13:08:51.508Z  
+**Runtime:** 106 ms (beats 41.32%)  
+**Memory:** 121.4 MB (beats 48.58%)  
+**Submitted:** 2026-10-26T13:31:15.304Z  
 
 ```cpp
 #define ll long long
 class Solution {
 public:
-    long long continuousSubarrays(vector<int>& nums) {
+    long long better(vector<int>& nums) {
         int n=nums.size();
         ll ans=0;
         int l=0;
@@ -82,6 +82,49 @@ public:
             ans += (r-l+1)*1LL;        
         }
         return ans;
+    }
+    long long best(vector<int>& nums) {
+        int n=nums.size();
+        //using mono tonic dequeue
+        deque<int>mn;
+        deque<int>mx;
+        long long ans =0;
+
+        int l=0;
+        for(int r=0;r<n;r++){
+
+            int x =nums[r];
+
+            //pusing the element
+            while(!mn.empty() && nums[mn.back()] > x){
+                mn.pop_back();
+            }
+            mn.push_back(r);
+
+            while(!mx.empty() && nums[mx.back()] < x){
+                mx.pop_back();
+            }
+            mx.push_back(r);
+
+            //remove outdated elemnt
+            while(!mn.empty() && mn.front() < l){
+                mn.pop_front();
+            }
+            while(!mx.empty() && mx.front() < l){
+                mx.pop_front();
+            }
+
+            while(l<r && nums[mx.front()] - nums[mn.front()] > 2){
+                if(mx.front()==l) mx.pop_front();
+                if(mn.front()==l) mn.pop_front();
+                l++;
+            }
+            ans+=(r-l+1);
+        }
+        return ans;
+    }
+    long long continuousSubarrays(vector<int>& nums) {
+        return best(nums);
     }
 };
 ```
